@@ -1,22 +1,10 @@
-import urllib.request
-import urllib.parse
-import re
+from webcrawl import completeLinks
+import db_insert
 
 
-def surfWeb(keywords, i):
-    addr = 'http://www.youtube.com/results?sp=EgIQAQ%253D%253D&'
-    query_string = urllib.parse.urlencode({'search_query': keywords})
+def search_aquisition():
+    search_queries = input("Input keywords for youtube search : ")
+    links = completeLinks(search_queries)
 
-    with urllib.request.urlopen(addr + query_string) as response:
-        html = response.read()
-
-    print(query_string)
-    search_result = re.findall(r'href=\"\/watch\?v=(.{11})',
-                               html.decode())
-    movie_addr = "http://www.youtube.com/watch?v=" + search_result[i]
-    print(movie_addr)
-
-    return movie_addr
-
-if __name__ == "__main__":
-    surfWeb('szukaj test cos (takie)', 3)
+    db_insert.insertRecords('root', 'music', 'tytul_dorobic', search_queries,
+                            3, 0)
