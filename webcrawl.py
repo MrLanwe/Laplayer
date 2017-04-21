@@ -1,6 +1,7 @@
 import urllib.request
 import urllib.parse
 import re
+import pafy
 
 
 def surfWeb(keywords):
@@ -29,6 +30,24 @@ def completeLinks(keywords):
 
     print(playlist)
     return playlist
+
+
+def video_details(link):
+    vid = pafy.new(link)
+    info = {'title': vid.title,
+            'duration': vid.duration,
+            'length': vid.length,
+            'views': vid.viewcount,
+            'channel': vid.username,
+            'rating': vid.rating}
+    return info
+
+
+def source_code(link):
+    with urllib.request.urlopen(link) as sc:
+        source = sc.read()
+    return source
+
 
 if __name__ == "__main__":
     search = input("input searched keywords : ")

@@ -14,11 +14,17 @@ def dbTable():
 
     # Create table as per requirements
     sql = """CREATE TABLE LANWE (
-             TITLE    CHAR(40)    NOT NULL,
+             TITLE    CHAR(200)    NOT NULL,
              KEYWORDS    CHAR(40)    NOT NULL,
-             DURATION    FLOAT, GRADE    INT,
+             DURATION    TIME  NOT NULL,
+             CHANNEL    CHAR(30),
+             VIEWS  INT,
+             RATING    FLOAT,
+             GRADE    INT,
              TIMESTAMP    DATETIME,
-             PLAYTIME    TIMESTAMP)"""
+             PLAYTIME    TIMESTAMP,
+             LENGTH    INT,
+             LINK    CHAR(60))"""
 
     c.execute(sql)
 
